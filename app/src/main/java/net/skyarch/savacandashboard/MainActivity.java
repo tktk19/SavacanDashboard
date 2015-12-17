@@ -53,6 +53,7 @@ public class MainActivity extends ActionBarActivity {
         UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
         List<UsbSerialDriver> availableDrivers = UsbSerialProber.getDefaultProber().findAllDrivers(manager);
         if (availableDrivers.isEmpty()) {
+            textView1.setText("SavarをUSBポートへ接続して下さい");
             Log.d(TAG, "Device NotFound serial communicate terminate");
             return;
         }
@@ -70,9 +71,6 @@ public class MainActivity extends ActionBarActivity {
         try {
             port.open(connection);
             port.setParameters(9960, 8, 1, 0);
-//            byte buffer[] = new byte[16];
-//            int numBytesRead = port.read(buffer, 1000);
-//            Log.d(TAG, "Read " + numBytesRead + " bytes.");
         } catch (IOException e) {
             e.printStackTrace();
         }
